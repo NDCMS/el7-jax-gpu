@@ -145,8 +145,18 @@ RUN pip3 install cython
 # Add jupyterhub
 RUN pip3 install jupyterhub==1.0.0 notebook==6.0.3
 
-# JAX
+# jaxlib requires GLIBC 2.23
+# Usually not recommended, but seems to work and is safe to try on containers
+# http://www.programmersought.com/article/45661501912/
+RUN wget https://ftp.gnu.org/gnu/glibc/glibc-2.23.tar.gz
+RUN tar xf glibc-2.23.tar.gz
+RUN cd glibc-2.23/
+RUN mkdir glibc-build; cd glibc-build
+RUN make
+RUN unlink /lib64/libm.so.6
+RUN make install
 
+# JAX
 #RUN env PYTHON_VERSION=cp36 \
 #    CUDA_VERSION=cuda102 \
 #    PLATFORM=linux_x86_64 \
