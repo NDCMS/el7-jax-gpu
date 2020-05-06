@@ -147,11 +147,12 @@ RUN pip3 install jupyterhub==1.0.0 notebook==6.0.3
 
 # JAX
 
-RUN PYTHON_VERSION=cp36 \
-    CUDA_VERSION=cuda102 \
-    PLATFORM=linux_x86_64 \
-    BASE_URL='https://storage.googleapis.com/jax-releases' \
-    pip3 install --upgrade $BASE_URL/$CUDA_VERSION/jaxlib-0.1.46-$PYTHON_VERSION-none-$PLATFORM.whl
+#RUN env PYTHON_VERSION=cp36 \
+#    CUDA_VERSION=cuda102 \
+#    PLATFORM=linux_x86_64 \
+#    BASE_URL='https://storage.googleapis.com/jax-releases' \
+#    pip3 install --upgrade $BASE_URL/$CUDA_VERSION/jaxlib-0.1.46-$PYTHON_VERSION-none-$PLATFORM.whl
+RUN pip3 install --upgrade https://storage.googleapis.com/jax-releases/cuda102/jaxlib-0.1.46-cp36-none-linux_x86_64.whl
 RUN pip3 install --upgrade jax
 
 #################################
