@@ -150,9 +150,7 @@ RUN pip3 install jupyterhub==1.0.0 notebook==6.0.3
 # http://www.programmersought.com/article/45661501912/
 RUN wget https://ftp.gnu.org/gnu/glibc/glibc-2.23.tar.gz
 RUN tar xf glibc-2.23.tar.gz
-RUN cd glibc-2.23/
-RUN mkdir glibc-build; cd glibc-build
-RUN ../configure --prefix=/usr
+RUN cd glibc-2.23 && mkdir glibc-build && cd glibc-build && ../configure --prefix=/usr
 RUN make
 RUN unlink /lib64/libm.so.6
 RUN make install
