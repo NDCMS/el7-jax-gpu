@@ -2,6 +2,7 @@ FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu16.04
 MAINTAINER Kenyi Hurtado <khurtado@nd.edu> 
 
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
+RUN add-apt-repository -y ppa:deadsnakes/ppa
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && apt-get upgrade -y --allow-unauthenticated && \
@@ -66,14 +67,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         openssh-server \
         pkg-config \
         python \
-        python3 \
-        python3-dev \
-        python3-pip \
-        python3-tk \
-        python-dev \
-        python-numpy \
-        python-pip \
-        python-tk \
+        python3.6 \
+        python3.6-dev \
         r-base \
         r-cran-rcpp \
         r-cran-rinside \
