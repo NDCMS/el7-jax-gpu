@@ -152,6 +152,7 @@ RUN wget https://ftp.gnu.org/gnu/glibc/glibc-2.23.tar.gz
 RUN tar xf glibc-2.23.tar.gz
 RUN cd glibc-2.23/
 RUN mkdir glibc-build; cd glibc-build
+RUN ../configure --prefix=/usr
 RUN make
 RUN unlink /lib64/libm.so.6
 RUN make install
