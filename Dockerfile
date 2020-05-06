@@ -146,7 +146,12 @@ RUN pip3 install cython
 RUN pip3 install jupyterhub==1.0.0 notebook==6.0.3
 
 # JAX
-RUN pip3 install --upgrade https://storage.googleapis.com/jax-releases/`nvidia-smi | sed -En "s/.* CUDA Version: ([0-9]*)\.([0-9]*).*/cuda\1\2/p"`/jaxlib-0.1.46-`python3 -V | sed -En "s/Python ([0-9]*)\.([0-9]*).*/cp\1\2/p"`-none-linux_x86_64.whl jax
+PYTHON_VERSION=cp36
+CUDA_VERSION=cuda102
+PLATFORM=linux_x86_64
+BASE_URL='https://storage.googleapis.com/jax-releases'
+RUN pip3 install --upgrade $BASE_URL/$CUDA_VERSION/jaxlib-0.1.46-$PYTHON_VERSION-none-$PLATFORM.whl
+RUN pip3 install --upgrade jax
 
 #################################
 # Manually add Singularity files
