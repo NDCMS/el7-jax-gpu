@@ -1,8 +1,11 @@
 FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu16.04
 MAINTAINER Kenyi Hurtado <khurtado@nd.edu> 
 
-RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
-RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt-get update && \
+    apt-get upgrade -y --allow-unauthenticated
+
+RUN apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:deadsnakes/ppa
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && apt-get upgrade -y --allow-unauthenticated && \
@@ -66,7 +69,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         openssh-client \
         openssh-server \
         pkg-config \
-        python \
         python3.6 \
         python3.6-dev \
         r-base \
@@ -128,7 +130,7 @@ RUN mkdir -p /host-libs /etc/OpenCL/vendors
 # But pip3 will be used here, just for clarity.
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
-RUN python3 get-pip.py
+RUN python3.6 get-pip.py
 RUN rm get-pip.py
 
 RUN pip3 install cython
@@ -148,9 +150,15 @@ RUN pip3 install --upgrade jax
 #################################
 # Manually add Singularity files
 
-RUN git clone https://github.com/jthiltges/singularity-environment.git /usr/singularity-environment/
-RUN cp -r /usr/singularity-environment/{environment,.exec,.run,.shell,singularity,.singularity.d,.test} /
-RUN mkdir /.singularity.d/libs
+RUN git clone https://github.com/jthiltges/singularity-environment.git /usr/singularity-environment && \
+    cp -r /usr/singularity-environment/environment / && \
+    cp -r /usr/singularity-environment/.exec / && \
+    cp -r /usr/singularity-environment/.run / && \
+    cp -r /usr/singularity-environment/.shell / && \
+    cp -r /usr/singularity-environment/singularity / && \
+    cp -r /usr/singularity-environment/.singularity.d / && \
+    cp -r /usr/singularity-environment/.test / && \
+    mkdir /.singularity.d/libs
 
 #################################
 # According to: https://docs-dev.nersc.gov/cgpu/software/#shifter-with-cuda
