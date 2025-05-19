@@ -143,7 +143,7 @@ RUN rm get-pip.py
 RUN pip3 install cython
 
 # Add jupyterhub
-RUN pip3 install jupyterhub==1.0.0 notebook==6.0.3
+RUN pip3 install jupyterhub==5.3.0 notebook==7.4.2
 
 # jaxlib requires GLIBC 2.23
 # Usually not recommended, but seems to work and is safe to try on containers
