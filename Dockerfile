@@ -136,7 +136,7 @@ RUN rm get-pip.py
 RUN pip3 install cython
 
 # Add jupyterhub
-RUN pip3 install jupyterhub==1.0.0 notebook==6.0.3
+pip3 install jupyterhub==5.3.0 notebook==7.4.2
 
 # JAX
 #RUN env PYTHON_VERSION=cp36 \
