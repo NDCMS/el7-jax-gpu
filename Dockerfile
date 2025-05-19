@@ -108,6 +108,7 @@ RUN for MNTPOINT in \
     /scratch365 \
     /data \
     /project \
+    /users \
   ; do \
     mkdir -p $MNTPOINT ; \
   done
